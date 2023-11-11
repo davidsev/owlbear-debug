@@ -1,0 +1,16 @@
+{
+  "name" : "OwlBug",
+  "version" : "0.0.1",
+  "description" : "Debug stuff",
+  "manifest_version" : 1,
+  "background_url" : "/frame.html#background",
+  "action" : {
+    "title" : "OwlBug",
+    "popover" : "/frame.html#action",
+    "icon" : "/icon.svg",
+    "width" : 400,
+    "height" : 600
+  },
+  "icon" : "/icon.svg",
+  "homepage_url" : "https://github.com/davidsev/owlbear-debug"
+}
