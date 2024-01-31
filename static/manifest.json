@@ -8,8 +8,8 @@
     "title" : "OwlBug",
     "popover" : "/frame.html#action",
     "icon" : "/icon.svg",
-    "width" : 400,
-    "height" : 600
+    "width" : 600,
+    "height" : 800
   },
   "icon" : "/icon.svg",
   "homepage_url" : "https://github.com/davidsev/owlbear-debug"

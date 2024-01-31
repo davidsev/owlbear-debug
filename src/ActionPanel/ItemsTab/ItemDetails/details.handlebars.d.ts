@@ -4,5 +4,4 @@ export default function template (options: {
     zIndex: string,
     position: string,
     rotation: string,
-    json: string,
 }): string;
