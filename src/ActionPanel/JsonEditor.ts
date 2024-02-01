@@ -3,6 +3,7 @@ import { isMenuButton, JSONEditor, MenuButton, MenuItem, Mode, TextContent } fro
 
 export class JsonEditor {
     private readonly saveCallback: (newJson: Metadata) => void;
+    private originalJson: Metadata = {};
     public div: HTMLDivElement = document.createElement('div');
     private editor: JSONEditor;
 
@@ -12,11 +13,13 @@ export class JsonEditor {
         this.editor = new JSONEditor({
             target: this.div,
             props: {
-                content: { json: json },
+                content: { json: {} },
                 mode: Mode.text,
                 onRenderMenu: this.buildMenu.bind(this),
             },
         });
+
+        this.setJson(json);
     }
 
     private buildMenu (menuItems: MenuItem[]): MenuItem[] {
@@ -66,10 +69,19 @@ export class JsonEditor {
         if (json === null || typeof json !== 'object')
             return;
 
+        // Set any removed keys to undefined.
+        for (const key in this.originalJson) {
+            if (!json.hasOwnProperty(key)) {
+                json[key] = undefined;
+            }
+        }
+
         this.saveCallback(json);
+        this.originalJson = json;
     }
 
     public setJson (json: Metadata): void {
         this.editor.set({ json: json });
+        this.originalJson = json;
     }
 }
