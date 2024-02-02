@@ -1,5 +1,4 @@
 import { ItemRow } from './ItemRow';
-import { ItemManager } from '../../../ItemManager';
 import { ItemsTab } from '../index';
 
 export class ItemsList {
@@ -7,9 +6,7 @@ export class ItemsList {
     public readonly div: HTMLDivElement = document.createElement('div');
 
     constructor (public readonly itemsTab: ItemsTab) {
-        const itemManager = ItemManager.getInstance();
-
-        itemManager.addEventListener('add', (e) => {
+        itemsTab.itemManager.addEventListener('add', (e) => {
             for (const [id, wrappedItem] of e.wrappedItems) {
                 const itemRow = new ItemRow(this, wrappedItem);
                 this.div.appendChild(itemRow.div);
@@ -18,7 +15,7 @@ export class ItemsList {
             }
             this.sortRows();
         });
-        itemManager.addEventListener('delete', (e) => {
+        itemsTab.itemManager.addEventListener('delete', (e) => {
             for (const [id, wrappedItem] of e.wrappedItems) {
                 const itemRow = this.items.get(id);
                 if (itemRow)
@@ -27,7 +24,7 @@ export class ItemsList {
             }
             this.sortRows();
         });
-        itemManager.addEventListener('update', (e) => {
+        itemsTab.itemManager.addEventListener('update', (e) => {
             this.sortRows();
         });
     }

@@ -2,6 +2,7 @@ import { ItemsList } from './ItemsList';
 import { ItemDetails } from './ItemDetails';
 import { ActionPanel } from '../index';
 import { WrappedItem } from '../../ItemManager/WrappedItem';
+import { ItemManager } from '../../ItemManager';
 
 export class ItemsTab {
     public readonly div: HTMLDivElement = document.createElement('div');
@@ -10,7 +11,10 @@ export class ItemsTab {
     private readonly itemList: ItemsList = new ItemsList(this);
     private readonly itemDetails: ItemDetails = new ItemDetails(this);
 
-    constructor (public readonly actionPanel: ActionPanel) {
+    constructor (
+        public readonly actionPanel: ActionPanel,
+        public readonly itemManager: ItemManager,
+    ) {
         this.listDiv.append(this.itemList.div);
         this.detailsDiv.append(this.itemDetails.div);
         this.div.append(this.listDiv, this.detailsDiv);

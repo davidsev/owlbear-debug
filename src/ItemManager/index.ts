@@ -2,6 +2,7 @@ import OBR, { Item, Player } from '@owlbear-rodeo/sdk';
 import { ItemManagerEvent } from './ItemManagerEvent';
 import { WrappedItem } from './WrappedItem';
 import { TypedEventTarget } from 'typescript-event-target';
+import { ItemFilter } from '@owlbear-rodeo/sdk/lib/types/ItemFilter';
 
 interface EventMap {
     add: ItemManagerEvent;
@@ -11,26 +12,41 @@ interface EventMap {
     deselected: ItemManagerEvent;
 }
 
+interface ItemApi {
+    getItems<ItemType extends Item> (filter?: ItemFilter<ItemType>): Promise<ItemType[]>;
+
+    onChange (callback: (items: Item[]) => void): () => void;
+}
+
 export class ItemManager extends TypedEventTarget<EventMap> {
 
-    private static instance: ItemManager;
+    private static sceneInstance: ItemManager;
+    private static localInstance: ItemManager;
     private items: Map<string, WrappedItem> = new Map();
 
-    private constructor () {
+    private constructor (private api: ItemApi) {
         super();
         OBR.onReady(() => {
-            OBR.scene.items.onChange(this.update.bind(this));
+            this.api.onChange(this.update.bind(this));
             OBR.player.onChange(this.selectionChanged.bind(this));
             OBR.scene.onReadyChange(this.readyChanged.bind(this));
         });
     }
 
-    public static getInstance (): ItemManager {
-        if (!ItemManager.instance) {
-            ItemManager.instance = new ItemManager();
+    public static getSceneInstance (): ItemManager {
+        if (!ItemManager.sceneInstance) {
+            ItemManager.sceneInstance = new ItemManager(OBR.scene.items);
         }
 
-        return ItemManager.instance;
+        return ItemManager.sceneInstance;
+    }
+
+    public static getLocalInstance (): ItemManager {
+        if (!ItemManager.localInstance) {
+            ItemManager.localInstance = new ItemManager(OBR.scene.local);
+        }
+
+        return ItemManager.localInstance;
     }
 
     private update (items: Item[], forceUpdate: boolean = false) {
@@ -95,7 +111,7 @@ export class ItemManager extends TypedEventTarget<EventMap> {
 
     private async readyChanged (ready: boolean): Promise<void> {
         if (ready) {
-            const items = await OBR.scene.items.getItems();
+            const items = await this.api.getItems();
             this.update(items);
             // Do the update a second time, to make sure the parent/child relationships are correct as they may have been added out of order.
             this.update(items, true);

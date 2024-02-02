@@ -7,13 +7,17 @@ import { RoomMetadataTab } from './RoomMetadataTab';
 import { loadTemplate } from '../Util/UI/loadTemplate';
 import template from './index.handlebars';
 import { findNode } from '../Util/UI/findNode';
+import { ItemManager } from '../ItemManager';
 
 export class ActionPanel {
 
     public readonly div: HTMLDivElement;
-    private readonly itemsButton: HTMLButtonElement;
-    private readonly itemsWrapper: HTMLDivElement = document.createElement('div');
-    public readonly itemsTab: ItemsTab;
+    private readonly sceneItemsButton: HTMLButtonElement;
+    private readonly sceneItemsWrapper: HTMLDivElement = document.createElement('div');
+    public readonly sceneItemsTab: ItemsTab;
+    private readonly localItemsButton: HTMLButtonElement;
+    private readonly localItemsWrapper: HTMLDivElement = document.createElement('div');
+    public readonly localItemsTab: ItemsTab;
     private readonly sceneMetadataButton: HTMLButtonElement;
     private readonly sceneMetadataWrapper: HTMLDivElement = document.createElement('div');
     public readonly sceneMetadataTab: SceneMetadataTab;
@@ -28,14 +32,19 @@ export class ActionPanel {
         this.div = loadTemplate(template());
 
         document.body.replaceChildren(this.div);
-        this.div.append(this.itemsWrapper);
+        this.div.append(this.sceneItemsWrapper);
+        this.div.append(this.localItemsWrapper);
         this.div.append(this.sceneMetadataWrapper);
         this.div.append(this.userMetadataWrapper);
         this.div.append(this.roomMetadataWrapper);
 
-        this.itemsButton = findNode(this.div, 'button#ItemsButton', HTMLButtonElement);
-        this.itemsTab = new ItemsTab(this);
-        this.itemsWrapper.append(this.itemsTab.div);
+        this.sceneItemsButton = findNode(this.div, 'button#SceneItemsButton', HTMLButtonElement);
+        this.sceneItemsTab = new ItemsTab(this, ItemManager.getSceneInstance());
+        this.sceneItemsWrapper.append(this.sceneItemsTab.div);
+
+        this.localItemsButton = findNode(this.div, 'button#LocalItemsButton', HTMLButtonElement);
+        this.localItemsTab = new ItemsTab(this, ItemManager.getLocalInstance());
+        this.localItemsWrapper.append(this.localItemsTab.div);
 
         this.sceneMetadataButton = findNode(this.div, 'button#SceneMetadataButton', HTMLButtonElement);
         this.sceneMetadataTab = new SceneMetadataTab(this);
@@ -63,25 +72,36 @@ export class ActionPanel {
         this.userMetadataButton.addEventListener('click', () => {
             this.userMetadataWrapper.style.display = 'block';
             this.sceneMetadataWrapper.style.display = 'none';
-            this.itemsWrapper.style.display = 'none';
+            this.sceneItemsWrapper.style.display = 'none';
+            this.localItemsWrapper.style.display = 'none';
             this.roomMetadataWrapper.style.display = 'none';
         });
         this.sceneMetadataButton.addEventListener('click', () => {
             this.userMetadataWrapper.style.display = 'none';
             this.sceneMetadataWrapper.style.display = 'block';
-            this.itemsWrapper.style.display = 'none';
+            this.sceneItemsWrapper.style.display = 'none';
+            this.localItemsWrapper.style.display = 'none';
             this.roomMetadataWrapper.style.display = 'none';
         });
-        this.itemsButton.addEventListener('click', () => {
+        this.sceneItemsButton.addEventListener('click', () => {
             this.userMetadataWrapper.style.display = 'none';
             this.sceneMetadataWrapper.style.display = 'none';
-            this.itemsWrapper.style.display = 'block';
+            this.sceneItemsWrapper.style.display = 'block';
+            this.localItemsWrapper.style.display = 'none';
+            this.roomMetadataWrapper.style.display = 'none';
+        });
+        this.localItemsButton.addEventListener('click', () => {
+            this.userMetadataWrapper.style.display = 'none';
+            this.sceneMetadataWrapper.style.display = 'none';
+            this.sceneItemsWrapper.style.display = 'none';
+            this.localItemsWrapper.style.display = 'block';
             this.roomMetadataWrapper.style.display = 'none';
         });
         this.roomMetadataButton.addEventListener('click', () => {
             this.userMetadataWrapper.style.display = 'none';
             this.sceneMetadataWrapper.style.display = 'none';
-            this.itemsWrapper.style.display = 'none';
+            this.sceneItemsWrapper.style.display = 'none';
+            this.localItemsWrapper.style.display = 'none';
             this.roomMetadataWrapper.style.display = 'block';
         });
     }
