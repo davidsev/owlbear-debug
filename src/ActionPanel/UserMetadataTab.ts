@@ -10,15 +10,15 @@ export class UserMetadataTab {
         this.jsonEditor = new JsonEditor(this.saveJson.bind(this));
         this.div.append(this.jsonEditor.div);
 
-        OBR.room.onMetadataChange(this.update.bind(this));
-        this.update();
+        OBR.player.onChange(player => this.update(player.metadata));
+        OBR.player.getMetadata().then(this.update.bind(this));
     }
 
-    private async update (): Promise<void> {
-        this.jsonEditor.setJson(await OBR.player.getMetadata());
+    private update (metadata: Metadata) {
+        this.jsonEditor.setJson(metadata);
     }
 
     private async saveJson (newJson: Metadata): Promise<void> {
-        OBR.player.setMetadata(newJson);
+        return OBR.player.setMetadata(newJson);
     }
 }
