@@ -2,7 +2,7 @@ import OBR from '@owlbear-rodeo/sdk';
 import './ItemsTab/ItemsList/style.scss';
 import { ItemsTab } from './ItemsTab';
 import { SceneMetadataTab } from './SceneMetadataTab';
-import { UserMetadataTab } from './UserMetadataTab';
+import { PlayerMetadataTab } from './PlayerMetadataTab';
 import { RoomMetadataTab } from './RoomMetadataTab';
 import { loadTemplate } from '../Util/UI/loadTemplate';
 import template from './index.handlebars';
@@ -23,7 +23,7 @@ export class ActionPanel {
     public readonly sceneMetadataTab: SceneMetadataTab;
     private readonly userMetadataButton: HTMLButtonElement;
     private readonly userMetadataWrapper: HTMLDivElement = document.createElement('div');
-    private readonly userMetadataTab: UserMetadataTab;
+    private readonly userMetadataTab: PlayerMetadataTab;
     private readonly roomMetadataButton: HTMLButtonElement;
     private readonly roomMetadataWrapper: HTMLDivElement = document.createElement('div');
     private readonly roomMetadataTab: RoomMetadataTab;
@@ -52,7 +52,7 @@ export class ActionPanel {
         this.sceneMetadataWrapper.style.display = 'none';
 
         this.userMetadataButton = findNode(this.div, 'button#UserMetadataButton', HTMLButtonElement);
-        this.userMetadataTab = new UserMetadataTab(this);
+        this.userMetadataTab = new PlayerMetadataTab(this);
         this.userMetadataWrapper.append(this.userMetadataTab.div);
         this.userMetadataWrapper.style.display = 'none';
 

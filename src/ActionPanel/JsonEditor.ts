@@ -2,12 +2,12 @@ import { Metadata } from '@owlbear-rodeo/sdk';
 import { isMenuButton, JSONEditor, MenuButton, MenuItem, Mode, TextContent } from 'vanilla-jsoneditor';
 
 export class JsonEditor {
-    private readonly saveCallback: (newJson: Metadata) => void;
+    private readonly saveCallback: ((newJson: Metadata) => void) | null;
     private originalJson: Metadata = {};
     public div: HTMLDivElement = document.createElement('div');
     private editor: JSONEditor;
 
-    constructor (saveCallback: (newJson: Metadata) => void, json: Metadata = {}) {
+    constructor (saveCallback: ((newJson: Metadata) => void) | null, json: Metadata = {}) {
         this.saveCallback = saveCallback;
 
         this.editor = new JSONEditor({
@@ -16,6 +16,7 @@ export class JsonEditor {
                 content: { json: {} },
                 mode: Mode.text,
                 onRenderMenu: this.buildMenu.bind(this),
+                readOnly: !this.saveCallback,
             },
         });
 
@@ -56,11 +57,14 @@ export class JsonEditor {
             itemsByName.get('arrow-rotate-left'),
             itemsByName.get('arrow-rotate-right'),
             { type: 'space' },
-            saveButton,
+            this.saveCallback ? saveButton : undefined,
         ].filter((i) => i) as MenuItem[]; // Filter out undefined items.
     }
 
     private saveButtonClicked (): void {
+        if (!this.saveCallback)
+            return;
+
         const content = this.editor.get();
         if (!content.hasOwnProperty('text'))
             return;
