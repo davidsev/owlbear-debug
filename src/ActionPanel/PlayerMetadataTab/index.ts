@@ -27,7 +27,6 @@ export class PlayerMetadataTab {
     }
 
     private partyUpdated (party: Player[]) {
-        console.log('partyUpdated', party);
         for (const player of party) {
             if (!this.partyRows.has(player.id)) {
                 const row = new PlayerRow(null);
