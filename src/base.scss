@@ -1,6 +1,8 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 html, body {
   margin: 0;
   padding: 0.5em;
-  color: white;
-  font-family: sans-serif;
 }

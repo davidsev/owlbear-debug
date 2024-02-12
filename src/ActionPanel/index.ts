@@ -1,4 +1,4 @@
-import OBR from '@owlbear-rodeo/sdk';
+import OBR, { Theme } from '@owlbear-rodeo/sdk';
 import './ItemsTab/ItemsList/style.scss';
 import { ItemsTab } from './ItemsTab';
 import { SceneMetadataTab } from './SceneMetadataTab';
@@ -12,19 +12,19 @@ import { ItemManager } from '../ItemManager';
 export class ActionPanel {
 
     public readonly div: HTMLDivElement;
-    private readonly sceneItemsButton: HTMLButtonElement;
+    private readonly sceneItemsButton: HTMLDivElement;
     private readonly sceneItemsWrapper: HTMLDivElement = document.createElement('div');
     public readonly sceneItemsTab: ItemsTab;
-    private readonly localItemsButton: HTMLButtonElement;
+    private readonly localItemsButton: HTMLDivElement;
     private readonly localItemsWrapper: HTMLDivElement = document.createElement('div');
     public readonly localItemsTab: ItemsTab;
-    private readonly sceneMetadataButton: HTMLButtonElement;
+    private readonly sceneMetadataButton: HTMLDivElement;
     private readonly sceneMetadataWrapper: HTMLDivElement = document.createElement('div');
     public readonly sceneMetadataTab: SceneMetadataTab;
-    private readonly userMetadataButton: HTMLButtonElement;
+    private readonly userMetadataButton: HTMLDivElement;
     private readonly userMetadataWrapper: HTMLDivElement = document.createElement('div');
     private readonly userMetadataTab: PlayerMetadataTab;
-    private readonly roomMetadataButton: HTMLButtonElement;
+    private readonly roomMetadataButton: HTMLDivElement;
     private readonly roomMetadataWrapper: HTMLDivElement = document.createElement('div');
     private readonly roomMetadataTab: RoomMetadataTab;
 
@@ -38,34 +38,45 @@ export class ActionPanel {
         this.div.append(this.userMetadataWrapper);
         this.div.append(this.roomMetadataWrapper);
 
-        this.sceneItemsButton = findNode(this.div, 'button#SceneItemsButton', HTMLButtonElement);
+        this.sceneItemsButton = findNode(this.div, 'div#SceneItemsButton', HTMLDivElement);
         this.sceneItemsTab = new ItemsTab(this, ItemManager.getSceneInstance());
         this.sceneItemsWrapper.append(this.sceneItemsTab.div);
 
-        this.localItemsButton = findNode(this.div, 'button#LocalItemsButton', HTMLButtonElement);
+        this.localItemsButton = findNode(this.div, 'div#LocalItemsButton', HTMLDivElement);
         this.localItemsTab = new ItemsTab(this, ItemManager.getLocalInstance());
         this.localItemsWrapper.append(this.localItemsTab.div);
 
-        this.sceneMetadataButton = findNode(this.div, 'button#SceneMetadataButton', HTMLButtonElement);
+        this.sceneMetadataButton = findNode(this.div, 'div#SceneMetadataButton', HTMLDivElement);
         this.sceneMetadataTab = new SceneMetadataTab(this);
         this.sceneMetadataWrapper.append(this.sceneMetadataTab.div);
         this.sceneMetadataWrapper.style.display = 'none';
 
-        this.userMetadataButton = findNode(this.div, 'button#UserMetadataButton', HTMLButtonElement);
+        this.userMetadataButton = findNode(this.div, 'div#UserMetadataButton', HTMLDivElement);
         this.userMetadataTab = new PlayerMetadataTab(this);
         this.userMetadataWrapper.append(this.userMetadataTab.div);
         this.userMetadataWrapper.style.display = 'none';
 
-        this.roomMetadataButton = findNode(this.div, 'button#RoomMetadataButton', HTMLButtonElement);
+        this.roomMetadataButton = findNode(this.div, 'div#RoomMetadataButton', HTMLDivElement);
         this.roomMetadataTab = new RoomMetadataTab(this);
         this.roomMetadataWrapper.append(this.roomMetadataTab.div);
         this.roomMetadataWrapper.style.display = 'none';
 
         this.hookDomEvents();
+
+        OBR.theme.onChange(this.updateTheme.bind(this));
+        OBR.theme.getTheme().then(this.updateTheme.bind(this));
     }
 
     public static init () {
         OBR.onReady(() => new ActionPanel());
+    }
+
+    private updateTheme (theme: Theme) {
+        if (theme.mode === 'DARK') {
+            document.documentElement.setAttribute('data-theme', 'dark');
+        } else {
+            document.documentElement.setAttribute('data-theme', 'light');
+        }
     }
 
     private hookDomEvents () {

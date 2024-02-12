@@ -1,6 +1,8 @@
-let mix = require('laravel-mix');
+const mix = require('laravel-mix');
+require('mix-tailwindcss');
 
 mix.ts('src/index.ts', 'dist/app.js')
+    .tailwind()
     .sourceMaps(false, 'source-map')
     .disableNotifications()
     .copy('static', 'dist')
