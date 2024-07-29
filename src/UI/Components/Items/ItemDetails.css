@@ -1,0 +1,80 @@
+
+dialog {
+    position: absolute;
+    inset: 10% 5%;
+    width: 90%;
+    height: 80%;
+    margin: 0;
+    padding: 0;
+    border: none;
+    border-radius: 1rem;
+    background-color: var(--panel-color);
+    color: var(--text-color);
+
+    &::backdrop {
+        backdrop-filter: blur(3px);
+    }
+}
+
+main {
+    padding: 1rem;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+
+    div.row {
+        display: flex;
+    }
+
+    div#layer {
+        font-size: 2.25em;
+        margin-right: 0.25em;
+    }
+
+    span#name {
+        font-weight: bold;
+        font-size: 1.25em;
+        padding-right: 0.5em;
+    }
+
+    div#id {
+        color: rgba(var(--text-rgb), 0.5);
+    }
+
+    div#close {
+        font-size: 1.5em;
+        margin-left: auto;
+        cursor: pointer;
+        line-height: 1;
+        padding: 0.25em 0.35em;
+        align-self: flex-start;
+        border: 1px solid transparent;
+        border-radius: 0.5em;
+
+        &:hover {
+            border-color: var(--theme-color);
+        }
+    }
+
+    dl {
+        margin: 0.5em 0 1em 0;
+        display: flex;
+        flex-wrap: wrap;
+
+        dt, dd {
+            margin: 0;
+            padding: 0.25em 0 0.125em 0.5em;
+        }
+
+        dt {
+            width: 20%;
+        }
+
+        dd {
+            width: 30%;
+            color: var(--text-secondary-color);
+        }
+
+    }
+}
+

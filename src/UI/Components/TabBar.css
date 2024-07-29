@@ -1,0 +1,17 @@
+
+:host {
+    display: block;
+    width: 100%;
+}
+
+nav {
+    display: flex;
+    width: 100%;
+
+    &:after {
+        /* Add a fake button to the end of the nav so the bottom border is full width */
+        content: '';
+        flex: 1 0 0;
+        border-bottom: 1px solid var(--text-color);
+    }
+}

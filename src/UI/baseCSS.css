@@ -1,0 +1,109 @@
+@import 'modern-normalize/modern-normalize.css';
+@import "vanilla-jsoneditor/themes/jse-theme-dark.css";
+
+/*
+ *  text is the color for text
+ *  theme is purple for highlights etc
+ *  background is the main background color
+ *  panel is the background color for panels and controls etc
+ */
+[data-theme=light] {
+    --text-rgb: 0, 0, 0;
+    --theme-rgb: 187, 153, 255;
+    --background-rgb: 229, 231, 235;
+    --panel-rgb: 242, 243, 249;
+}
+
+[data-theme=dark] {
+    --text-rgb: 255, 255, 255;
+    --theme-rgb: 187, 153, 255;
+    --background-rgb: 46, 49, 66;
+    --panel-rgb: 34, 39, 56;
+}
+
+:host {
+    --text-color: rgb(var(--text-rgb));
+    --text-secondary-color: rgba(var(--text-rgb), 0.7);
+    --theme-color: rgb(var(--theme-rgb));
+    --background-color: rgb(var(--background-rgb));
+    --panel-color: rgb(var(--panel-rgb));
+
+    display: block;
+    color: var(--text-color);
+    font-family: sans-serif;
+    line-height: 1.5;
+}
+
+.icon {
+
+    width: 1em;
+    height: 1em;
+
+    &:is(i) {
+        display: inline-block;
+        margin: 0 0.25em;
+        vertical-align: middle;
+    }
+
+    &:is(div) {
+        margin: 0.25em;
+    }
+
+    &.icon-map {
+        background-image: url(/icons/map.svg);
+    }
+
+    &.icon-drawing {
+        background-image: url(/icons/drawing.svg);
+    }
+
+    &.icon-prop {
+        background-image: url(/icons/prop.svg);
+    }
+
+    &.icon-mount {
+        background-image: url(/icons/mount.svg);
+    }
+
+    &.icon-character {
+        background-image: url(/icons/character.svg);
+    }
+
+    &.icon-attachment {
+        background-image: url(/icons/attachment.svg);
+    }
+
+    &.icon-note {
+        background-image: url(/icons/note.svg);
+    }
+
+    &.icon-text {
+        background-image: url(/icons/text.svg);
+    }
+
+
+    &.icon-locked {
+        background-image: url(/icons/locked.svg);
+    }
+
+    &.icon-hidden {
+        background-image: url(/icons/hidden.svg);
+    }
+
+    &.icon-disabled-hit {
+        background-image: url(/icons/disabledHit.svg);
+    }
+
+    &.icon-metadata {
+        background-image: url(/icons/metadata.svg);
+    }
+
+
+    &.icon-select {
+        background-image: url(/icons/select.svg);
+    }
+
+    &.icon-delete {
+        background-image: url(/icons/delete.svg);
+    }
+}

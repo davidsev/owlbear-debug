@@ -1,0 +1,21 @@
+
+:host {
+    display: block;
+}
+
+div {
+    padding: 0.5em 0.75em 0.25em 0.75em;
+    border: 0 solid transparent;
+    border-bottom: 1px solid var(--text-color);
+    border-radius: 0;
+    white-space: nowrap;
+    cursor: pointer;
+
+    &.active {
+        border-bottom: 3px solid var(--theme-color);
+        padding-bottom: calc(0.25em - 2px);
+        outline: none;
+        font-weight: 500;
+        background: rgba(var(--theme-rgb), 0.2);
+    }
+}

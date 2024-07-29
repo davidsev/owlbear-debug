@@ -1,34 +1,38 @@
 {
-  "version": "0.0.1",
+  "version": "2.0.0-alpha.1",
   "scripts": {
-    "dev": "mix",
-    "watch": "mix watch",
-    "prod": "mix --production",
-    "serve": "http-server ./dist -p 8088 --cors -c-1 ",
-    "test": "jest"
+    "dev": "webpack --node-env=development",
+    "watch": "webpack --node-env=development --watch",
+    "serve": "URL_PREFIX=http://127.0.0.1:8088 webpack-dev-server --node-env=development --port 8088 --hot",
+    "prod": "webpack --node-env=production"
   },
   "keywords": [],
   "author": "",
   "license": "GPL-3.0-or-later",
   "description": "",
   "devDependencies": {
-    "http-server": "^14.1.1",
-    "laravel-mix": "^6.0.49",
-    "mix-tailwindcss": "^1.3.0",
-    "postcss-svg": "^3.0.0",
-    "resolve-url-loader": "^5.0.0",
-    "rippleui": "^1.12.1",
-    "sass": "^1.62.1",
-    "sass-loader": "^13.2.2",
-    "tailwindcss": "^3.4.1",
-    "ts-loader": "^9.4.4",
-    "typescript": "^5.0.4"
+    "autoprefixer": "^10.4.19",
+    "copy-webpack-plugin": "^12.0.2",
+    "cssnano": "^7.0.4",
+    "html-webpack-plugin": "^5.6.0",
+    "postcss": "^8.4.40",
+    "postcss-image-inliner": "^7.0.1",
+    "postcss-import": "^16.1.0",
+    "postcss-loader": "^8.1.1",
+    "postcss-nesting": "^12.1.5",
+    "raw-loader": "^4.0.2",
+    "ts-loader": "^9.5.1",
+    "typescript": "^5.0.4",
+    "webpack": "^5.93.0",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^5.0.4"
   },
   "dependencies": {
-    "@owlbear-rodeo/sdk": "^1.3.8",
-    "handlebars": "^4.7.7",
-    "handlebars-loader": "^1.7.3",
+    "@davidsev/owlbear-utils": "^0.25.0",
+    "@owlbear-rodeo/sdk": "^2.4.0",
+    "lit": "^3.1.4",
+    "modern-normalize": "^2.0.0",
     "typescript-event-target": "^1.0.5",
-    "vanilla-jsoneditor": "^0.21.4"
+    "vanilla-jsoneditor": "^0.23.8"
   }
 }

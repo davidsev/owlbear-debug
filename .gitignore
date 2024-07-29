@@ -2,7 +2,6 @@
 dist
 node_modules
 .idea
-mix-manifest.json
 todo.txt
 **/.DS_Store
 

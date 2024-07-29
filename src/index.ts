@@ -1,9 +1,13 @@
-import { init, registerInitFunction } from './init';
-import { initBackground } from './background';
-import './base.scss';
-import { ActionPanel } from './ActionPanel';
+import './UI';
+import { registerInitFunction } from './init';
+import { ActionPanel } from './UI/Components/ActionPanel';
+import styles from './UI/baseCSS.css';
 
-(window as any).init = init;
+registerInitFunction('background', () => {});
+registerInitFunction('action', function () {
+    document.body.appendChild(new ActionPanel());
 
-registerInitFunction('background', initBackground);
-registerInitFunction('action', ActionPanel.init);
+    const styleSheet = document.createElement('style');
+    styleSheet.innerText = styles;
+    document.head.appendChild(styleSheet);
+});

@@ -30,6 +30,7 @@ export class ItemManager extends TypedEventTarget<EventMap> {
             this.api.onChange(this.update.bind(this));
             OBR.player.onChange(this.selectionChanged.bind(this));
             OBR.scene.onReadyChange(this.readyChanged.bind(this));
+            this.api.getItems().then(this.update.bind(this));
         });
     }
 
@@ -120,5 +121,9 @@ export class ItemManager extends TypedEventTarget<EventMap> {
 
     public get (id: string): WrappedItem | undefined {
         return this.items.get(id);
+    }
+
+    public get all (): Map<string, WrappedItem> {
+        return this.items;
     }
 }

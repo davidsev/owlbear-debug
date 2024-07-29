@@ -106,4 +106,18 @@ export class WrappedItem extends TypedEventTarget<EventMap> {
     public get parent (): WrappedItem | undefined {
         return this._parent;
     }
+
+    public get icons (): string[] {
+        const icons: string[] = [];
+        if (!this.item.visible)
+            icons.push('hidden');
+        if (this.item.locked)
+            icons.push('locked');
+        if (this.item.disableHit)
+            icons.push('disabled-hit');
+        if (Object.keys(this.item.metadata).length)
+            icons.push('metadata');
+
+        return icons;
+    }
 }

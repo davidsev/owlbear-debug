@@ -1,0 +1,16 @@
+
+:host {
+    padding: 0 0.5em;
+}
+
+main {
+    display: flex;
+
+    .name {
+        padding: 0 0.5em 0 0.25em;
+    }
+
+    &.selected {
+        background-color: rgba(var(--theme-rgb), 0.2);
+    }
+}
