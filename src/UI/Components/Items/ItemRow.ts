@@ -4,7 +4,6 @@ import { BaseElement } from '../../BaseElement';
 import style from './ItemRow.css';
 import { baseCSS } from '../../baseCSS';
 import { WrappedItem } from '../../../ItemManager/WrappedItem';
-import OBR from '@owlbear-rodeo/sdk';
 import { ItemDetails } from './ItemDetails';
 
 @customElement('item-row')
@@ -35,9 +34,8 @@ export class ItemRow extends BaseElement {
     // Render the UI as a function of component state
     render () {
         return html`
-            <main @click="${this.clickHandler}" @dblclick="${this.doubleClickHandler}"
-                  class="${this.wrappedItem.selected ? 'selected' : ''}" style="padding-left: ${this.indent * 0.75}em"
-            >
+            <main @click="${this.clickHandler}" class="${this.wrappedItem.selected ? 'selected' : ''}"
+                  style="padding-left: ${this.indent * 0.75}em">
                 <div class="icon icon-${this.item.layer.toLowerCase()}"></div>
                 <div class="name">${this.item.name}</div>
                 ${this.wrappedItem.icons.map(i => html`
@@ -50,9 +48,5 @@ export class ItemRow extends BaseElement {
 
     private clickHandler () {
         this.itemDetails.show();
-    }
-
-    private doubleClickHandler () {
-        OBR.player.select([this.item.id]);
     }
 }
