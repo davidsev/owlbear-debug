@@ -30,7 +30,11 @@ export class ItemManager extends TypedEventTarget<EventMap> {
             this.api.onChange(this.update.bind(this));
             OBR.player.onChange(this.selectionChanged.bind(this));
             OBR.scene.onReadyChange(this.readyChanged.bind(this));
-            this.api.getItems().then(this.update.bind(this));
+            this.api.getItems().then(items => {
+                // We have to do the initial load twice, as otherwise a child item may come before its parent and not be linked correctly.
+                this.update(items);
+                this.update(items, true);
+            });
         });
     }
 
