@@ -3,11 +3,12 @@ import { customElement, property, query } from 'lit/decorators.js';
 import { BaseElement } from '../BaseElement';
 import { baseCSS } from '../baseCSS';
 import { isMenuButton, JSONEditor, MenuButton, MenuItem, Mode } from 'vanilla-jsoneditor';
+import style from './JsonEditor.css';
 
 @customElement('json-editor')
 export class JsonEditor extends BaseElement {
 
-    static styles = baseCSS();
+    static styles = baseCSS(style);
     private jsonEditor?: JSONEditor;
 
     @property({ type: Object })

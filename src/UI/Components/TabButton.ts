@@ -42,6 +42,6 @@ export class TabButton extends BaseElement {
         if (!target)
             return;
 
-        target.style.display = this.active ? 'initial' : 'none';
+        target.style.display = this.active ? '' : 'none';
     }
 }

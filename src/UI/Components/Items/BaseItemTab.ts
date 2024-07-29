@@ -4,9 +4,13 @@ import { ItemManager } from '../../../ItemManager';
 import { query } from 'lit/decorators.js';
 import { ItemRow } from './ItemRow';
 import { WrappedItem } from '../../../ItemManager/WrappedItem';
+import { baseCSS } from '../../baseCSS';
+import style from './BaseItemTab.css';
 
 export class BaseItemTab extends BaseElement {
-    
+
+    static styles = baseCSS(style);
+
     @query('main')
     private accessor main!: HTMLElement;
     private rows: Map<string, ItemRow> = new Map<string, ItemRow>();

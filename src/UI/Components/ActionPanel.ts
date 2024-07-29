@@ -11,28 +11,30 @@ export class ActionPanel extends BaseElement {
 
     render () {
         return html`
-            <tab-bar>
-                <tab-button target="#itemsTab">Items</tab-button>
-                <tab-button target="#metadataTab">Metadata</tab-button>
-            </tab-bar>
-            <div id="itemsTab">
+            <main>
                 <tab-bar>
-                    <tab-button target="scene-items-tab">Scene Items</tab-button>
-                    <tab-button target="local-items-tab">Local Items</tab-button>
+                    <tab-button target="#itemsTab">Items</tab-button>
+                    <tab-button target="#metadataTab">Metadata</tab-button>
                 </tab-bar>
-                <scene-items-tab></scene-items-tab>
-                <local-items-tab></local-items-tab>
-            </div>
-            <div id="metadataTab">
-                <tab-bar>
-                    <tab-button target="room-metadata-tab">Room</tab-button>
-                    <tab-button target="scene-metadata-tab">Scene</tab-button>
-                    <tab-button target="player-metadata-tab">Player</tab-button>
-                </tab-bar>
-                <room-metadata-tab></room-metadata-tab>
-                <scene-metadata-tab></scene-metadata-tab>
-                <player-metadata-tab></player-metadata-tab>
-            </div>
+                <div id="itemsTab">
+                    <tab-bar>
+                        <tab-button target="scene-items-tab">Scene Items</tab-button>
+                        <tab-button target="local-items-tab">Local Items</tab-button>
+                    </tab-bar>
+                    <scene-items-tab></scene-items-tab>
+                    <local-items-tab></local-items-tab>
+                </div>
+                <div id="metadataTab">
+                    <tab-bar>
+                        <tab-button target="room-metadata-tab">Room</tab-button>
+                        <tab-button target="scene-metadata-tab">Scene</tab-button>
+                        <tab-button target="player-metadata-tab">Player</tab-button>
+                    </tab-bar>
+                    <room-metadata-tab></room-metadata-tab>
+                    <scene-metadata-tab></scene-metadata-tab>
+                    <player-metadata-tab></player-metadata-tab>
+                </div>
+            </main>
         `;
     }
 }

@@ -75,7 +75,11 @@ main {
             width: 30%;
             color: var(--text-secondary-color);
         }
+    }
 
+    item-editor, item-metadata-editor {
+        height: 100%;
+        overflow: hidden auto;
     }
 }
 

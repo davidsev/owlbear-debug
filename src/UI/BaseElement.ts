@@ -1,5 +1,5 @@
-import { LitElement, unsafeCSS } from 'lit';
-import style from './baseCSS.css';
+import { LitElement } from 'lit';
+import { baseCSS } from './baseCSS';
 
 export class BaseElement extends LitElement {
 
@@ -8,9 +8,7 @@ export class BaseElement extends LitElement {
     private eventCleanup: AbortController = new AbortController();
 
     // Define scoped styles right with your component, in plain CSS
-    static styles = [
-        unsafeCSS(style),
-    ];
+    static styles = baseCSS();
 
     // When removed, clean up our events
     disconnectedCallback () {
