@@ -51,6 +51,7 @@ module.exports = {
                         const url_prefix = process.env.URL_PREFIX || '';
                         manifest.background_url = url_prefix + manifest.background_url;
                         manifest.icon = url_prefix + manifest.icon;
+                        manifest.action.popover = url_prefix + manifest.action.popover;
                         return JSON.stringify(manifest, null, 4);
                     },
                 },
