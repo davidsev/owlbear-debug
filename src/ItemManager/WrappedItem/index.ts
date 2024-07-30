@@ -1,4 +1,4 @@
-import { Item as BaseItem } from '@owlbear-rodeo/sdk';
+import OBR, { Item as BaseItem } from '@owlbear-rodeo/sdk';
 import { WrappedItemEvent } from './WrappedItemEvent';
 import { TypedEventTarget } from 'typescript-event-target';
 import { ItemManager } from '../index';
@@ -119,5 +119,31 @@ export class WrappedItem extends TypedEventTarget<EventMap> {
             icons.push('metadata');
 
         return icons;
+    }
+
+    public select (): void {
+        OBR.player.select([this.item.id]);
+    }
+
+    public async zoomTo (): Promise<void> {
+        const bounds = await this.itemManager.api.getItemBounds([this.item.id]);
+        const newBounds = {
+            min: {
+                x: bounds.min.x - bounds.width / 2,
+                y: bounds.min.y - bounds.height / 2,
+            },
+            max: {
+                x: bounds.max.x + bounds.width / 2,
+                y: bounds.max.y + bounds.height / 2,
+            },
+            width: bounds.width * 2,
+            height: bounds.height * 2,
+            center: bounds.center,
+        };
+        await OBR.viewport.animateToBounds(newBounds);
+    }
+
+    public delete (): void {
+        this.itemManager.api.deleteItems([this.item.id]);
     }
 }

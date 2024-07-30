@@ -103,6 +103,10 @@
         background-image: url(/icons/select.svg);
     }
 
+    &.icon-zoomto {
+        background-image: url(/icons/zoomto.svg);
+    }
+
     &.icon-delete {
         background-image: url(/icons/delete.svg);
     }

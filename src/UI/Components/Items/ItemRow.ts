@@ -31,18 +31,33 @@ export class ItemRow extends BaseElement {
     // Render the UI as a function of component state
     render () {
         return html`
-            <main @click="${this.clickHandler}" class="${this.wrappedItem.selected ? 'selected' : ''}"
-                  style="padding-left: ${this.indent * 0.75}em">
-                <div class="icon icon-${this.item.layer.toLowerCase()}"></div>
-                <div class="name">${this.item.name}</div>
+            <main class="${this.wrappedItem.selected ? 'selected' : ''}" style="padding-left: ${this.indent * 0.75}em">
+                <div @click="${this.clickHandler}" class="icon icon-${this.item.layer.toLowerCase()}"></div>
+                <div @click="${this.clickHandler}" class="name">${this.item.name}</div>
                 ${this.wrappedItem.icons.map(i => html`
-                    <div class="icon icon-${i}"></div>
+                    <div @click="${this.clickHandler}" class="icon icon-${i}"></div>
                 `)}
+                <div @click="${this.clickHandler}" class="spacer"></div>
+                <div class="icon icon-select" @click="${this.select}"></div>
+                <div class="icon icon-zoomto" @click="${this.zoomTo}"></div>
+                <div class="icon icon-delete" @click="${this.delete}"></div>
             </main>
         `;
     }
 
     private clickHandler () {
         this.dispatchEvent(new Event('show-details'));
+    }
+
+    private select () {
+        this.wrappedItem.select();
+    }
+
+    private zoomTo () {
+        this.wrappedItem.zoomTo();
+    }
+
+    private delete () {
+        this.wrappedItem.delete();
     }
 }

@@ -1,4 +1,4 @@
-import OBR, { Item, Player } from '@owlbear-rodeo/sdk';
+import OBR, { BoundingBox, Item, Player } from '@owlbear-rodeo/sdk';
 import { ItemManagerEvent } from './ItemManagerEvent';
 import { WrappedItem } from './WrappedItem';
 import { TypedEventTarget } from 'typescript-event-target';
@@ -16,6 +16,10 @@ interface ItemApi {
     getItems<ItemType extends Item> (filter?: ItemFilter<ItemType>): Promise<ItemType[]>;
 
     onChange (callback: (items: Item[]) => void): () => void;
+
+    getItemBounds (ids: string[]): Promise<BoundingBox>;
+
+    deleteItems (ids: string[]): Promise<void>;
 }
 
 export class ItemManager extends TypedEventTarget<EventMap> {
@@ -24,7 +28,7 @@ export class ItemManager extends TypedEventTarget<EventMap> {
     private static localInstance: ItemManager;
     private items: Map<string, WrappedItem> = new Map();
 
-    private constructor (private api: ItemApi) {
+    private constructor (public readonly api: ItemApi) {
         super();
         OBR.onReady(() => {
             this.api.onChange(this.update.bind(this));
