@@ -24,6 +24,11 @@ export class ItemDetails extends BaseElement {
         this.wrappedItem.addEventListener('deselected', e => this.requestUpdate(), { signal: this.eventCleanupSignal });
     }
 
+    disconnectedCallback () {
+        this.dialog?.close();
+        super.disconnectedCallback();
+    }
+
     public get item () {
         return this.wrappedItem.item;
     }

@@ -1,12 +1,11 @@
 
 dialog {
     position: absolute;
-    width: 100vw;
-    height: 100vh;
-    max-width: 100vw;
-    max-height: 100vh;
-    padding: 0;
+    inset: 10% 5%;
+    width: 90%;
+    height: 80%;
     margin: 0;
+    padding: 0;
     border: none;
     border-radius: 1rem;
     background-color: var(--panel-color);
@@ -43,17 +42,17 @@ main {
     }
 
     div#close {
-        font-size: 2.5em;
-        margin: 0 1rem 0 auto;
-        padding: 0;
+        font-size: 1.5em;
+        margin-left: auto;
         cursor: pointer;
         line-height: 1;
-        font-weight: bold;
+        padding: 0.25em 0.35em;
         align-self: flex-start;
+        border: 1px solid transparent;
         border-radius: 0.5em;
 
         &:hover {
-            color: var(--theme-color);
+            border-color: var(--theme-color);
         }
     }
 
