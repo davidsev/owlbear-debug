@@ -1,6 +1,6 @@
 {
   "name" : "OwlBug",
-  "version" : "0.0.1",
+  "version" : "DEV",
   "description" : "Debug stuff",
   "manifest_version" : 1,
   "background_url" : "/frame.html#background",
