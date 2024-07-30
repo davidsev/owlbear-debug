@@ -84,7 +84,7 @@ export class ItemDetails extends BaseElement {
 
     private hideDialog (e: PointerEvent) {
         // Clicks within the dialog should have target set to the div or one of its children.
-        // If the target is the dalog itself, then the click was on the backdrop.
+        // If the target is the dialog itself, then the click was on the backdrop.
         if (e.target == this.dialog)
             this.dialog.close();
     }

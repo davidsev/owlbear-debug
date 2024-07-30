@@ -1,10 +1,9 @@
 import { html } from 'lit';
-import { customElement, property, query } from 'lit/decorators.js';
+import { customElement, property } from 'lit/decorators.js';
 import { BaseElement } from '../../BaseElement';
 import style from './ItemRow.css';
 import { baseCSS } from '../../baseCSS';
 import { WrappedItem } from '../../../ItemManager/WrappedItem';
-import { ItemDetails } from './ItemDetails';
 
 @customElement('item-row')
 export class ItemRow extends BaseElement {
@@ -13,8 +12,6 @@ export class ItemRow extends BaseElement {
 
     @property({ type: Number, reflect: true })
     public accessor indent = 0;
-    @query('item-details')
-    private accessor itemDetails!: ItemDetails;
 
     constructor (public readonly wrappedItem: WrappedItem) {
         super();
@@ -42,11 +39,10 @@ export class ItemRow extends BaseElement {
                     <div class="icon icon-${i}"></div>
                 `)}
             </main>
-            <item-details .wrappedItem="${this.wrappedItem}"></item-details>
         `;
     }
 
     private clickHandler () {
-        this.itemDetails.show();
+        this.dispatchEvent(new Event('show-details'));
     }
 }

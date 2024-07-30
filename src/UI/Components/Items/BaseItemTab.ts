@@ -6,6 +6,7 @@ import { ItemRow } from './ItemRow';
 import { WrappedItem } from '../../../ItemManager/WrappedItem';
 import { baseCSS } from '../../baseCSS';
 import style from './BaseItemTab.css';
+import { ItemDetails } from './ItemDetails';
 
 export class BaseItemTab extends BaseElement {
 
@@ -13,7 +14,7 @@ export class BaseItemTab extends BaseElement {
 
     @query('main')
     private accessor main!: HTMLElement;
-    private rows: Map<string, ItemRow> = new Map<string, ItemRow>();
+    private rows: Map<string, [ItemRow, ItemDetails]> = new Map<string, [ItemRow, ItemDetails]>();
 
     constructor (public readonly items: ItemManager) {
         super();
@@ -41,8 +42,11 @@ export class BaseItemTab extends BaseElement {
         for (const [id, wrappedItem] of items) {
             if (!this.rows.has(id)) {
                 const row = new ItemRow(wrappedItem);
-                this.rows.set(id, row);
+                const details = new ItemDetails(wrappedItem);
+                row.addEventListener('show-details', () => details.show());
+                this.rows.set(id, [row, details]);
                 this.main.appendChild(row);
+                this.main.appendChild(details);
             }
         }
         this.sortRows();
@@ -50,9 +54,10 @@ export class BaseItemTab extends BaseElement {
 
     private removeItems (items: Map<string, WrappedItem>) {
         for (const [id, wrappedItem] of items) {
-            const row = this.rows.get(id);
-            if (row) {
-                this.main.removeChild(row);
+            const elements = this.rows.get(id);
+            if (elements) {
+                this.main.removeChild(elements[0]);
+                this.main.removeChild(elements[1]);
                 this.rows.delete(id);
             }
         }
@@ -61,18 +66,18 @@ export class BaseItemTab extends BaseElement {
     private sortRows () {
         // Sort the rows into z-index order
         [...this.rows.values()].sort((a, b): number => {
-            return b.item.zIndex - a.item.zIndex;
-        }).forEach(row => this.main.appendChild(row));
+            return b[0].item.zIndex - a[0].item.zIndex;
+        }).forEach(row => this.main.appendChild(row[0]));
 
         // Then move the child items to be under their parent.
-        for (const [id, row] of this.rows) {
+        for (const [id, [row, details]] of this.rows) {
             if (!row.wrappedItem.parent)
                 this.moveChildRows(row, 1);
         }
     }
 
     private moveChildRows (parent: ItemRow, depth: number) {
-        for (const [id, row] of this.rows) {
+        for (const [id, [row, details]] of this.rows) {
             if (row.wrappedItem.parent?.item.id == parent.item.id) {
                 row.indent = depth;
                 parent.after(row);
