@@ -26,6 +26,10 @@ main {
         display: flex;
     }
 
+    div.grow {
+        flex-grow: 1;
+    }
+
     div#layer {
         font-size: 2.25em;
         margin-right: 0.25em;
@@ -39,6 +43,7 @@ main {
 
     div#id {
         color: rgba(var(--text-rgb), 0.5);
+        flex-grow: 1;
     }
 
     div#close {

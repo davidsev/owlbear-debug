@@ -40,16 +40,21 @@ export class ItemDetails extends BaseElement {
                 <main>
                     <div class="row">
                         <div id="layer" class="icon icon-${this.item.layer.toLowerCase()}"></div>
-                        <div>
+                        <div class="grow">
                             <div class="row">
                                 <span id="name">${this.item.name}</span>
                                 ${this.wrappedItem.icons.map(i => html`
                                     <div class="icon icon-${i}"></div>
                                 `)}
+                                <div id="close" @click="${this.hide}">&times;</div>
                             </div>
-                            <div id="id">${this.item.id}</div>
+                            <div class="row">
+                                <div id="id">${this.item.id}</div>
+                                <div class="icon icon-select" @click="${this.select}"></div>
+                                <div class="icon icon-zoomto" @click="${this.zoomTo}"></div>
+                                <div class="icon icon-delete" @click="${this.delete}"></div>
+                            </div>
                         </div>
-                        <div id="close" @click="${this.hide}">&times;</div>
                     </div>
                     <dl>
                         <dt>Type:</dt>
@@ -87,5 +92,17 @@ export class ItemDetails extends BaseElement {
         // If the target is the dialog itself, then the click was on the backdrop.
         if (e.target == this.dialog)
             this.dialog.close();
+    }
+
+    private select () {
+        this.wrappedItem.select();
+    }
+
+    private zoomTo () {
+        this.wrappedItem.zoomTo();
+    }
+
+    private delete () {
+        this.wrappedItem.delete();
     }
 }
