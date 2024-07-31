@@ -144,6 +144,7 @@ export class WrappedItem extends TypedEventTarget<EventMap> {
     }
 
     public delete (): void {
+        console.info('Deleting item ' + this.item.name, this.item);
         this.itemManager.api.deleteItems([this.item.id]);
     }
 }
