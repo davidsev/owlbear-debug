@@ -1,0 +1,40 @@
+
+dialog {
+    position: absolute;
+    inset: 20% 10%;
+    width: 80%;
+    height: 60%;
+    margin: 0;
+    padding: 0.5em 1em;
+    border: 2px solid darkred;
+    border-radius: 1rem;
+    background-color: var(--panel-color);
+    color: var(--text-color);
+
+    &::backdrop {
+        backdrop-filter: blur(3px);
+    }
+
+    div.row {
+        display: flex;
+    }
+
+    div#close {
+        font-size: 2em;
+        margin-left: auto;
+        cursor: pointer;
+        line-height: 1;
+        padding: 0.125em 0.25em;
+        align-self: flex-start;
+        border: 1px solid transparent;
+        border-radius: 0.5em;
+
+        &:hover {
+            border-color: var(--theme-color);
+        }
+    }
+
+    main {
+        white-space: pre;
+    }
+}
