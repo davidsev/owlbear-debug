@@ -8,6 +8,8 @@ import './Components/Metadata/SceneMetadataTab';
 import './Components/Metadata/PlayerMetadataTab';
 import './Components/Metadata/PlayerMetadataEditor';
 import './Components/Metadata/ItemMetadataEditor';
+import './Components/Metadata/ToolMetadataEditor';
+import './Components/Metadata/ToolMetadataTab';
 import './Components/Items/SceneItemsTab';
 import './Components/Items/LocalItemsTab';
 import './Components/Items/ItemRow';

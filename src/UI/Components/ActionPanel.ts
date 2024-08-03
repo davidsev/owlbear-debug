@@ -29,10 +29,12 @@ export class ActionPanel extends BaseElement {
                         <tab-button target="room-metadata-tab">Room</tab-button>
                         <tab-button target="scene-metadata-tab">Scene</tab-button>
                         <tab-button target="player-metadata-tab">Player</tab-button>
+                        <tab-button target="tool-metadata-tab">Tool</tab-button>
                     </tab-bar>
                     <room-metadata-tab></room-metadata-tab>
                     <scene-metadata-tab></scene-metadata-tab>
                     <player-metadata-tab></player-metadata-tab>
+                    <tool-metadata-tab></tool-metadata-tab>
                 </div>
             </main>
         `;
