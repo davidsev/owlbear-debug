@@ -14,7 +14,6 @@ export class ToolMetadataEditor extends BaseMetadataEditor {
     protected update (changedProperties: PropertyValues) {
         super.update(changedProperties);
 
-        console.log('getMetadata', this.toolId, changedProperties);
         if (this.toolId !== changedProperties.get('toolId')) {
             this.changeCallback?.();
         }
