@@ -3,6 +3,8 @@ const copyPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const DefinePlugin = require('webpack').DefinePlugin;
 
+const version = process.env.NODE_ENV === 'development' ? 'DEV' : process.env.npm_package_version;
+
 module.exports = {
     entry: './src/index.ts',
     output: {
@@ -35,7 +37,7 @@ module.exports = {
         }),
         new DefinePlugin({
             URL_PREFIX: JSON.stringify(process.env.URL_PREFIX || ''),
-            VERSION: JSON.stringify(process.env.npm_package_version) || 'ERROR',
+            VERSION: JSON.stringify(version),
         }),
         new copyPlugin({
             patterns: [
@@ -46,7 +48,7 @@ module.exports = {
                     from: 'static/manifest.json',
                     transform: (content, path) => {
                         let manifest = JSON.parse(content.toString());
-                        manifest.version = process.env.npm_package_version;
+                        manifest.version = version;
                         const url_prefix = process.env.URL_PREFIX || '';
                         manifest.background_url = url_prefix + manifest.background_url;
                         manifest.icon = url_prefix + manifest.icon;
