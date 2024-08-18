@@ -15,3 +15,6 @@ import './Components/Items/LocalItemsTab';
 import './Components/Items/ItemRow';
 import './Components/Items/ItemDetails';
 import './Components/Items/ItemEditor';
+import './Components/Broadcast/BroadcastTab';
+import './Components/Broadcast/BroadcastSender';
+import './Components/Broadcast/BroadcastReceiver';

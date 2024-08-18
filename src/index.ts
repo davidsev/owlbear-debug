@@ -2,6 +2,7 @@ import './UI';
 import { registerInitFunction } from './init';
 import { ActionPanel } from './UI/Components/ActionPanel';
 import styles from './UI/baseCSS.css';
+import OBR from '@owlbear-rodeo/sdk';
 
 registerInitFunction('background', () => {});
 registerInitFunction('action', function () {
@@ -11,3 +12,5 @@ registerInitFunction('action', function () {
     styleSheet.innerText = styles;
     document.head.appendChild(styleSheet);
 });
+
+(window as any).OBR = OBR;

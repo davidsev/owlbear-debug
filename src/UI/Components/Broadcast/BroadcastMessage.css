@@ -1,0 +1,18 @@
+
+main {
+    padding: 0 0.5em;
+
+    &:hover {
+        background-color: rgba(var(--theme-rgb), 0.1);
+    }
+}
+
+header {
+    span.time {
+        color: rgba(var(--text-rgb), 0.5);
+    }
+}
+
+output {
+    white-space: pre;
+}

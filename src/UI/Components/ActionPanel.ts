@@ -15,6 +15,7 @@ export class ActionPanel extends BaseElement {
                 <tab-bar>
                     <tab-button target="#itemsTab">Items</tab-button>
                     <tab-button target="#metadataTab">Metadata</tab-button>
+                    <tab-button target="broadcast-tab">Broadcast</tab-button>
                 </tab-bar>
                 <div id="itemsTab">
                     <tab-bar>
@@ -36,6 +37,7 @@ export class ActionPanel extends BaseElement {
                     <player-metadata-tab></player-metadata-tab>
                     <tool-metadata-tab></tool-metadata-tab>
                 </div>
+                <broadcast-tab></broadcast-tab>
             </main>
         `;
     }
