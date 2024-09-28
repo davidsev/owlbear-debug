@@ -64,7 +64,10 @@ export class ItemDetails extends BaseElement {
                         <dt>Position:</dt>
                         <dd>${this.item.position.x.toFixed()}, ${this.item.position.y.toFixed()}</dd>
                         <dt>Scale:</dt>
-                        <dd>${this.item.scale.x.toFixed()} &times; ${this.item.scale.y.toFixed()}</dd>
+                        <dd>
+                            ${Math.round(this.item.scale.x * 100) / 100} &times;
+                            ${Math.round(this.item.scale.y * 100) / 100}
+                        </dd>
                         <dt>Rotation:</dt>
                         <dd>${this.item.rotation}&deg;</dd>
                     </dl>
