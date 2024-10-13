@@ -19,7 +19,7 @@
     "postcss-image-inliner": "^7.0.1",
     "postcss-import": "^16.1.0",
     "postcss-loader": "^8.1.1",
-    "postcss-nesting": "^12.1.5",
+    "postcss-nesting": "^13.0.0",
     "raw-loader": "^4.0.2",
     "ts-loader": "^9.5.1",
     "typescript": "^5.0.4",
@@ -28,11 +28,11 @@
     "webpack-dev-server": "^5.0.4"
   },
   "dependencies": {
-    "@davidsev/owlbear-utils": "^0.25.0",
-    "@owlbear-rodeo/sdk": "^2.4.0",
-    "date-fns": "^3.6.0",
+    "@davidsev/owlbear-utils": "^0.26.0",
+    "@owlbear-rodeo/sdk": "^3.0.0",
+    "date-fns": "4.1",
     "lit": "^3.1.4",
-    "modern-normalize": "^2.0.0",
+    "modern-normalize": "^3.0.1",
     "typescript-event-target": "^1.0.5",
     "vanilla-jsoneditor": "^0.23.8"
   }
