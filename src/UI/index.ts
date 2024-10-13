@@ -15,6 +15,8 @@ import './Components/Items/LocalItemsTab';
 import './Components/Items/ItemRow';
 import './Components/Items/ItemDetails';
 import './Components/Items/ItemEditor';
+import './Components/Items/ItemUniforms';
+import './Components/Items/ItemShader';
 import './Components/Broadcast/BroadcastTab';
 import './Components/Broadcast/BroadcastSender';
 import './Components/Broadcast/BroadcastReceiver';

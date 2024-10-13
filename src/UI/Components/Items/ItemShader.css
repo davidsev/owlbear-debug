@@ -1,0 +1,36 @@
+
+div.row {
+    display: flex;
+    padding: 0.5em 0 0 0.5em;
+    width: 100%;
+
+    button {
+        padding: 0.6em 1em 0.35em 1em;
+        margin-left: auto;
+        display: inline-flex;
+        align-items: center;
+        font-weight: 500;
+        font-size: 0.875em;
+        border: 1px solid var(--theme-color);
+        cursor: pointer;
+        line-height: 1.25em;
+        background-color: rgba(var(--theme-rgb), 0.2);
+        color: var(--text-color);
+
+        &:hover {
+            background-color: rgba(var(--theme-rgb), 1);
+        }
+    }
+}
+
+:host, main {
+    height: 100%;
+    width: 100%;
+}
+
+textarea {
+    width: 100%;
+    height: calc(100% - 2.5em);
+    background-color: var(--background-color);
+    color: var(--text-color);
+}

@@ -4,6 +4,7 @@ import { BaseElement } from '../../BaseElement';
 import style from './ItemDetails.css';
 import { baseCSS } from '../../baseCSS';
 import { WrappedItem } from '../../../ItemManager/WrappedItem';
+import { isEffect } from '@owlbear-rodeo/sdk';
 
 @customElement('item-details')
 export class ItemDetails extends BaseElement {
@@ -74,9 +75,17 @@ export class ItemDetails extends BaseElement {
                     <tab-bar>
                         <tab-button target="item-metadata-editor">Metadata</tab-button>
                         <tab-button target="item-editor">Edit Item</tab-button>
+                        ${isEffect(this.item) ? html`
+                            <tab-button target="item-uniforms">Uniforms</tab-button>
+                            <tab-button target="item-shader">Shader</tab-button>
+                        ` : ''}
                     </tab-bar>
                     <item-metadata-editor .wrappedItem="${this.wrappedItem}"></item-metadata-editor>
                     <item-editor .wrappedItem="${this.wrappedItem}"></item-editor>
+                    ${isEffect(this.item) ? html`
+                        <item-uniforms .wrappedItem="${this.wrappedItem}"></item-uniforms>
+                        <item-shader .wrappedItem="${this.wrappedItem}"></item-shader>
+                    ` : ''}
                 </main>
             </dialog>
         `;
